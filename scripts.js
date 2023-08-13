@@ -4642,15 +4642,19 @@ function onHandleReset() {
         return response;
     }
 
+
     (async () => {
         try {
             const result = await getData();
-            x = result.data;
-
+            //x = result.data;
+            console.log("aca imprimo algo", x)
+            x = jsonData
+            evalFunc();
         } catch (err) {
             console.log(err);
         }
     })();
+
 
     setTimeout(() => {
         document.querySelector(".lds-ring").classList.add("hide");
