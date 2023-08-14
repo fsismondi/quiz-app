@@ -4427,7 +4427,7 @@ let result = 0;
 score.textContent = index
 totalScore.textContent = result
 alertBox.style.display = "none"
-const arrlength = [0, 1, 2, 3]
+const arrlength = [0, 1, 2]
 arrlength.sort((a, b) => { return 0.5 - Math.random() })
 hamburger.addEventListener('mouseover', hamFunction)
 hamburger.addEventListener('mouseout', hamFunction1)
@@ -4578,7 +4578,7 @@ const onHandleSubmit = () => {
 
             arrlength.sort((a, b) => { return 0.5 - Math.random() })
 
-            if (index === 10) {
+            if (index === 400) {
                 alertBox.style.display = "block"
                 alertBoxScore.textContent = result
 
@@ -4657,25 +4657,15 @@ function onHandleReset() {
     })
 
     // x = JSON.parse(this.response)
-    if (x.results[index].incorrect_answers.length === 3) {
+    if (x.results[index].incorrect_answers.length === 2) {
         answers[arrlength[0]].innerHTML = x.results[index].correct_answer
         answers[arrlength[1]].innerHTML = x.results[index].incorrect_answers[0]
         answers[arrlength[2]].innerHTML = x.results[index].incorrect_answers[1]
-        answers[arrlength[3]].innerHTML = x.results[index].incorrect_answers[2]
         question.innerHTML = x.results[index].question
         correctAnswer = x.results[index].correct_answer;
-
     }
     else {
-        index++;
-        answers[arrlength[0]].innerHTML = x.results[index].correct_answer
-        answers[arrlength[1]].innerHTML = x.results[index].incorrect_answers[0]
-        answers[arrlength[2]].innerHTML = x.results[index].incorrect_answers[1]
-        answers[arrlength[3]].innerHTML = x.results[index].incorrect_answers[2]
-        question.innerHTML = x.results[index].question
-        correctAnswer = x.results[index].correct_answer;
-
-
+        throw new Error('Wring length of incorrect answers!');
     }
     // }
     // }
