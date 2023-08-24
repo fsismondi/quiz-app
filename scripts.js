@@ -12,7 +12,9 @@ const score = document.querySelector('.score')
 const totalScore = document.querySelector(".total__score")
 const themeSelector = document.querySelector('.theme_mode')
 const installBtn = document.querySelector('.install__btn')
-jsonData = {
+
+
+questions = {
     "response_code": 0,
     "results": [
         {
@@ -933,9 +935,9 @@ jsonData = {
             "type": "multiple",
             "difficulty": "medium",
             "question": "84.  Conforme a la Ley 7/2007, de 12 de abril, del Estatuto B�sico del Empleado P�blico\ncuando un funcionario sea designado como personal eventual, se encuentra en la\nsituaci�n administrativa de:\n",
-            "correct_answer": " Excedencia voluntaria.\n",
+            "correct_answer": " Servicios especiales, cuando no opten por permanecer en la situaci�n de servicio activo.\n",
             "incorrect_answers": [
-                " Servicios especiales, cuando no opten por permanecer en la situaci�n de servicio activo.\n",
+                " Excedencia voluntaria.\n",
                 " Excedencia forzosa."
             ]
         },
@@ -3451,10 +3453,10 @@ jsonData = {
             "category": "Examen: para el Lucho",
             "type": "multiple",
             "difficulty": "medium",
-            "question": "313.  En cuanto a los propios dispositivos de alarma de incendios, en edificios o\nestablecimientos en los que existan personas con discapacidad auditiva, personas que\ntengan que llevar protecci�n auditiva o donde el nivel del ruido supere los 60 dB(",
+            "question": "313.  En cuanto a los propios dispositivos de alarma de incendios, en edificios o\nestablecimientos en los que existan personas con discapacidad auditiva, personas que\ntengan que llevar protecci�n auditiva o donde el nivel del ruido supere los 60 dB(A), estos\ndispositivos de alarma ser�n:\n ",
             "correct_answer": " Ac�sticos y visuales.",
             "incorrect_answers": [
-                ", estos\ndispositivos de alarma ser�n:\na) Ac�sticos, visuales y t�ctiles.\n",
+                "Ac�sticos, visuales y t�ctiles.\n",
                 " Visuales y t�ctiles.\n"
             ]
         },
@@ -4418,6 +4420,18 @@ jsonData = {
     ]
 }
 
+// Randomly sort the results array
+let pickedQuestions = questions.results.sort(() => 0.5 - Math.random());
+
+// Pick the first two results after shuffling
+let jsonData = {
+    response_code: questions.response_code,
+    results: pickedQuestions.slice(0, 19)
+};
+
+console.log(jsonData);
+
+
 var axios;
 
 // let xhttp = new XMLHttpRequest()
@@ -4578,7 +4592,7 @@ const onHandleSubmit = () => {
 
             arrlength.sort((a, b) => { return 0.5 - Math.random() })
 
-            if (index === 400) {
+            if (index === 19) {
                 alertBox.style.display = "block"
                 alertBoxScore.textContent = result
 
