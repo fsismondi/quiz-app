@@ -14,7 +14,7 @@ const themeSelector = document.querySelector('.theme_mode')
 const installBtn = document.querySelector('.install__btn')
 
 
-questions = {
+let questions = {
     "response_code": 0,
     "results": [
         {
@@ -4420,16 +4420,26 @@ questions = {
     ]
 }
 
-// Randomly sort the results array
-let pickedQuestions = questions.results.sort(() => 0.5 - Math.random());
+let startIn = 300
+let randomQuiz = true
+let pickedQuestions = []
+if (randomQuiz) {
+    pickedQuestions = questions.results.sort(() => 0.5 - Math.random()).slice(0, 20);
+    quantityOfQuestions = 20
+}
+else {
+    pickedQuestions = questions.results.slice(startIn, startIn + 100)
+    quantityOfQuestions = 100
+}
 
 // Pick the first two results after shuffling
 let jsonData = {
     response_code: questions.response_code,
-    results: pickedQuestions.slice(0, 19)
+    results: pickedQuestions
 };
 
-console.log(jsonData);
+
+//console.log(jsonData);
 
 
 var axios;
@@ -4592,7 +4602,7 @@ const onHandleSubmit = () => {
 
             arrlength.sort((a, b) => { return 0.5 - Math.random() })
 
-            if (index === 19) {
+            if (index === quantityOfQuestions) {
                 alertBox.style.display = "block"
                 alertBoxScore.textContent = result
 
@@ -4685,8 +4695,6 @@ function onHandleReset() {
     // }
     // xhttp.open('GET', "https://opentdb.com/api.php?amount=10", true)
     // xhttp.send()
-
-
 
     score.textContent = index
     totalScore.textContent = result
